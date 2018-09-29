@@ -1,0 +1,18 @@
+.AppBar{
+  font-family: 'Oswald', sans-serif;
+  background-color: #3ABBCA;
+  font-size: 1.7em;
+}
+
+.UploadButton{
+  text-align: center;
+}
+
+.imagePreview{
+  display: block;
+  margin-left: 450px;
+}
+
+.AnalyzeButton{
+  margin-left: 580px;
+}
