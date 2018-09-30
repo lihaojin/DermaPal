@@ -29,6 +29,9 @@ class App extends Component {
       AcneTreatments: null,
       TreatmentName: null,
       TreatmentDescription: null,
+      ProductName: null,
+      ProductCompany: null,
+      ProductDescription: null,
     };
   }
 
@@ -46,7 +49,7 @@ class App extends Component {
    }
 
    handleButtonClick = () => {
-    app.models.predict({id:'Acne', version:'4db4746377a34c69a1fafd5abf0dfe4d'}, this.state.image).then(
+    app.models.predict({id:'Acne', version:'54a4533500944e5ba2842d999436b8ec'}, this.state.image).then(
       response => {
         const answer = response.outputs[0].data.concepts[0].id
         this.setState({result: answer})
@@ -56,9 +59,12 @@ class App extends Component {
           this.setState({AcneType: response.data.AcneType});
           this.setState({AcneDescription: response.data.Description});
           this.setState({AcneCauses: response.data.Causes});
-          this.setState({AcneTreatments: response.data.Treatments[1].TreatmentType});
-          this.setState({TreatmentName: response.data.Treatments[1].Name});
-          this.setState({TreatmentDescription: response.data.Treatments[1].Description});
+          this.setState({AcneTreatments: response.data.Treatments[0].TreatmentType});
+          this.setState({TreatmentName: response.data.Treatments[0].Name});
+          this.setState({TreatmentDescription: response.data.Treatments[0].Description});
+          this.setState({ProductName: response.data.Treatments[0].Product});
+          this.setState({ProductCompany: response.data.Treatments[0].Brand});
+          this.setState({ProductDescription: response.data.Treatments[0].Instructions});
         })
         .catch(error => {
           alert("Error" + error);
@@ -107,7 +113,11 @@ class App extends Component {
       AcneCauses = {this.state.AcneCauses}
       AcneTreatments = {this.state.AcneTreatments}
       TreatmentName = {this.state.TreatmentName}
-      TreatmentDescription = {this.state.TreatmentDescription}/>
+      TreatmentDescription = {this.state.TreatmentDescription}
+      ProductName = {this.state.ProductName}
+      ProductCompany = {this.state.ProductCompany}
+      ProductDescription = {this.state.ProductDescription}
+      />
       </div>
       </div>
       </div>

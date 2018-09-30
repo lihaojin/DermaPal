@@ -1,12 +1,12 @@
 .AppBar{
   font-family: 'Oswald', sans-serif;
-  background-color: #3ABBCA;
+  background-color: #33AFDC;
   font-size: 1.7em;
 
 }
 .backg{
   width: 100%;
-  background-color: #3ABBCA;
+  background-color: #322D2D;
   font-family: 'Oswald', sans-serif;
 }
 
@@ -26,18 +26,15 @@
 .imagePreview{
   margin-left: 125px;
   margin-top: 0px;
-  padding: 0px
-
+  padding: 0px;
  }
 
  .ResultsPanel{
    justify-content: center;
-   font-family: 'Oswald', sans-serif;
  }
 
 .tablabels{
   font-weight: bold;
-  font-family: 'Oswald', sans-serif;
 }
 
 .DescriptionLabel{

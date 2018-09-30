@@ -54,13 +54,13 @@ class ResultTabs extends React.Component {
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="primary"
+            indicatorColor="secondary"
             textColor="primary"
-            fullWidth
-          >
+            fullWidth>
             <Tab label="Description" />
             <Tab label="Causes" />
             <Tab label="Treatments" />
+            <Tab label ="Product" />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -77,6 +77,14 @@ class ResultTabs extends React.Component {
           <div>{this.props.TreatmentName}</div><br />
           <div className="tablabels">Treatment Description</div>
           <div>{this.props.TreatmentDescription}</div>
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+          <div className="tablabels">Product Name</div>
+          <div>{this.props.ProductName}</div><br />
+          <div className="tablabels">Company</div>
+          <div>{this.props.ProductCompany}</div><br />
+          <div className="tablabels">Description</div>
+          <div>{this.props.ProductDescription}</div><br />
           </TabContainer>
         </SwipeableViews>
       </div>

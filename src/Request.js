@@ -12,4 +12,8 @@ export {GetTreatment}
     else if(acneType == "Pustule") {
       return axios.get(baseUrl + '/Pustule')
     }
+
+    else if(acneType == "None") {
+      return axios.get(baseUrl + '/None')
+    }
   }
