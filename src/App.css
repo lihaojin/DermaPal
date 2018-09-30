@@ -2,17 +2,79 @@
   font-family: 'Oswald', sans-serif;
   background-color: #3ABBCA;
   font-size: 1.7em;
+
+}
+.backg{
+  width: 100%;
+  background-color: #3ABBCA;
+  font-family: 'Oswald', sans-serif;
 }
 
-.UploadButton{
+.AcneType{
+  padding-top: 15px;
   text-align: center;
-}
 
-.imagePreview{
-  display: block;
-  margin-left: 450px;
+}
+.UploadButton{
+  margin-left: 19.3%;
 }
 
 .AnalyzeButton{
-  margin-left: 580px;
+  margin-left: 20%;
+}
+
+.imagePreview{
+  margin-left: 125px;
+  margin-top: 0px;
+  padding: 0px
+
+ }
+
+ .ResultsPanel{
+   justify-content: center;
+   font-family: 'Oswald', sans-serif;
+ }
+
+.tablabels{
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+}
+
+.DescriptionLabel{
+  font-weight: bold;
+}
+
+
+
+.main-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding-top: 50px;
+}
+.container {
+  flex: 1;
+
+  flex-flow: column wrap;
+  text-align: center;
+  justify-content: center;
+  border: 0px solid gray;
+
+  margin: 5px;
+  min-width: 500px;
+  min-height: 430px;
+}
+.container> * {
+  flex: 1;
+}
+button {
+  width: 100%;
+}
+
+.AcneTypeLabel{
+  width: 500px;
+}
+
+.Pap{
+  border-radius: 15px 5px 5px 15px;
 }

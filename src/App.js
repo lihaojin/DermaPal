@@ -5,6 +5,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Image from 'react-image-resizer';
 import UploadButton from './UploadButton';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import {GetTreatment} from './Request';
+import ResultTabs from './ResultTabs';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 import './App.css';
 
 const Clarifai = require('clarifai');
@@ -17,34 +23,56 @@ class App extends Component {
       image: null,
       imagePreview: null,
       result: null,
+      AcneType: "Acne Type",
+      AcneDescription: null,
+      AcneCauses: null,
+      AcneTreatments: null,
+      TreatmentName: null,
+      TreatmentDescription: null,
     };
   }
 
-
   fileSelectedHandler = event => {
-    this.setState({
-      image: event.target.files[0],
-      imagePreview: URL.createObjectURL(event.target.files[0])
-    })
+    var reader = new FileReader();
+    reader.onload = () => {
+      var dataURL = reader.result.replace(/^data:image\/(.*);base64,/, '');
+      this.setState({
+        image: dataURL,
+        imagePreview: reader.result
+      })
+    };
+
+    reader.readAsDataURL(event.target.files[0]);
    }
 
    handleButtonClick = () => {
-     const result = JSON.stringify(this.state.imagePreview);
-     console.log(result);
-    app.models.predict({id:'Acne', version:'4db4746377a34c69a1fafd5abf0dfe4d'}, result).then(
-      function(response) {
-        //this.setState({result: response})
-        console.log(response)
+    app.models.predict({id:'Acne', version:'4db4746377a34c69a1fafd5abf0dfe4d'}, this.state.image).then(
+      response => {
+        const answer = response.outputs[0].data.concepts[0].id
+        this.setState({result: answer})
+
+        GetTreatment(answer)
+        .then(response => {
+          this.setState({AcneType: response.data.AcneType});
+          this.setState({AcneDescription: response.data.Description});
+          this.setState({AcneCauses: response.data.Causes});
+          this.setState({AcneTreatments: response.data.Treatments[1].TreatmentType});
+          this.setState({TreatmentName: response.data.Treatments[1].Name});
+          this.setState({TreatmentDescription: response.data.Treatments[1].Description});
+        })
+        .catch(error => {
+          alert("Error" + error);
+        })
       },
       function(err) {
         // there was an error
-      }
+      },
     );
   };
 
   render() {
     return (
-      <div>
+      <div className="backg" >
       <AppBar position="static">
       <div className="AppBar">
       <Toolbar>
@@ -53,12 +81,36 @@ class App extends Component {
       </div>
       </AppBar>
 
-      <div className="imagePreview">
+      <div className="main-container">
+        <div className="container">
+        <div className="imagePreview">
       <Image
        src={this.state.imagePreview}
        width={370}
-       height={370}/>
+       height={370} />
+
+          </div>
+          </div>
+          <div className="container">
+
+       <div className="AcneTypeLabel">
+       <div className="Pap">
+       <Paper>
+       <Typography variant="headline" component="h1">
+       {this.state.AcneType}
+       </Typography>
+       </Paper>
        </div>
+      <ResultTabs
+      AcneType = {this.state.AcneType}
+      AcneDescription = {this.state.AcneDescription}
+      AcneCauses = {this.state.AcneCauses}
+      AcneTreatments = {this.state.AcneTreatments}
+      TreatmentName = {this.state.TreatmentName}
+      TreatmentDescription = {this.state.TreatmentDescription}/>
+      </div>
+      </div>
+      </div>
 
       <div className="UploadButton">
       <input
@@ -67,7 +119,7 @@ class App extends Component {
       multiple
       type="file"
       style={{display: 'none'}}
-      onChange = {this.fileSelectedHandler}
+      onChange = {(event) => this.fileSelectedHandler(event)}
       />
       <UploadButton />
       </div>
@@ -81,6 +133,7 @@ class App extends Component {
       Analyze
       </Button>
       </div>
+
 
       </div>
     );
