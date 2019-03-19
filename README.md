@@ -6,7 +6,7 @@ What sparked the idea of this project was our personal experience of acne. Acne 
 ## How to Run
 1. Clone this repository
 2. Clone the following back-end repository for DermaPal https://github.com/GBrigitte/DermaPalBackend
-3. In your terminal, open two windows and go to the file path of each repository. Use "npm start" for both.
+3. Open your terminal and cd to the file path of each repository. Use "npm start" for both.
 
 ## Video Walkthrough
 
